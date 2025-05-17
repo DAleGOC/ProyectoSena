@@ -25,7 +25,12 @@ body {
     width: 100%;
     max-width: 400px;
 }
-
+#avatar {
+    width: 15rem;
+    height: 15rem;
+    border-radius: 50%;
+    margin-bottom: 10px;
+}
 .container {
     background: white;
     padding: 29px;

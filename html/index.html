@@ -19,46 +19,43 @@
             />
         </head>
 
-        <body>
+ <body>
             <header>
                 
             </header>
-            <main>
-                <div class="login-container">
-                    <h2 class="fw-bold">Bienvenido a Solusoft</h2>
-                        <i  class="bi bi-person-circle fs-1"  alt="Usuario"></i>
-                    <form id="loginForm" >
-                        <div class="mb-3 input-group">
-                            <span class="input-group-text"><i class="bi bi-person"></i></span>
-                            <input type="text" id="username" class="form-control" placeholder="Usuario">
-                        </div>
-                       
-                     <div class="mb-3 input-group" id="password-group">
-                             <span class="input-group-text"><i class="bi bi-lock"></i></span>
-                             <input id="password" type="password" class="form-control" placeholder="Password">
-                            <button id="togglePassword" type="button" class="btn btn-outline-secondary">
-                                   <i class="bi bi-eye"></i>
-                             </button>
-                     </div>
+    <main class="login-container text-center">
 
+             <div class="mb-4">
+               <img src="/img/avatar.png"  alt="Avatar Solusoft"  class="img-fluid rounded-circle" id="avatar" >
+             </div>
+             <h2 class="fw-bold mb-4">Bienvenido a Solusoft</h2>
+        <form id="loginForm">
+             <div class="mb-3 input-group">
+                <span class="input-group-text"><i class="bi bi-person"></i></span>
+                <input type="text" id="username" class="form-control" placeholder="Identificación">
+             </div>
+            <div class="mb-3 input-group">
+                <span class="input-group-text"><i class="bi bi-lock"></i></span>
+                <input type="password" id="passwordLogin" class="form-control" placeholder="Contraseña">
+                <button type="button" class="btn btn-outline-secondary toggle-password" data-target="passwordLogin">
+                <i class="bi bi-eye"></i> </button>
+            </div>
+            <div class="form-check text-start mb-3">
+                <input class="form-check-input" type="checkbox" value="" id="rememberMe">
+                <label class="form-check-label" for="rememberMe"> Recuérdame </label>
+            </div>
+            <div id="loginError" class="text-danger mb-3"></div>
+            <div class="d-grid gap-2">
+                <button type="submit" class="btn btn-primary">Iniciar Sesión</button>
+                <button type="button" id="goRegister" class="btn btn-success">Registrarse</button>
+            </div>
+        </form>
+    </main>
 
-                        <div class="form-check text-start">
-                            <input type="checkbox" class="form-check-input" id="rememberMe">
-                            <label class="form-check-label" for="rememberMe">Recordarme</label>
-                        </div>
-                        <div class="mb-3 text-end">
-                            <a href="#" class="text-primary">Olvidé mi contraseña</a>
-                        </div>
-                        <button type="submit" class="btn btn-primary w-100 mb-2">Iniciar Sesión</button>
-                        <button type="button" id="registerBtn"   class="btn btn-success w-100">Registrarse</button>
-                    </form>
-                
-                </div>    
-            </main>
             <footer>
                 <!-- place footer here -->
             </footer>
             <!-- Bootstrap JavaScript Libraries -->
-           <script src="/Javacript/script.js"></script>
+           <script src="/Javacript/index.js"></script>
         </body>
     </html>
