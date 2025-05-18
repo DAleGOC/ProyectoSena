@@ -13,6 +13,7 @@ crossorigin="anonymous"
   const confirmField= document.getElementById("confirmPassword");
   const strengthBar = document.getElementById("strengthBar");
   const strengthTxt = document.getElementById("strengthText");
+  const volverbtn= document.getElementById("volverbtn");
 
   const campos = [
     { id:"nombre", regla:/^[A-Za-zÁÉÍÓÚáéíóúñÑ ]{2,50}$/, mensaje:"Solo letras, mínimo 2 caracteres." },
@@ -37,7 +38,7 @@ crossorigin="anonymous"
     });
   });
 
-  // fuerza contraseña
+ 
   pwdField.addEventListener("input",()=>{
     let v=pwdField.value, s=0;
     if(v.length>=6) s++; if(/[A-Z]/.test(v)) s++;
@@ -50,7 +51,7 @@ crossorigin="anonymous"
     toggle();
   });
 
-  // confirmar
+  
   function validarConfirm(){
     const e=document.getElementById("confirmPasswordError");
     if(pwdField.value && pwdField.value===confirmField.value){
@@ -97,6 +98,11 @@ crossorigin="anonymous"
   });
 
   toggle();
+
+  volverbtn.addEventListener("click", () => {
+    window.location.href = "/html/index.html";
+  });
+    
 });
 
     
