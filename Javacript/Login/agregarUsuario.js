@@ -330,7 +330,7 @@ form.addEventListener('submit', async function(e) {
             
             // Redirigir al login después de 3 segundos
             setTimeout(() => {
-                window.location.href = '/html/Login/index.html';
+                window.location.href = '/index.html';
             }, 3000);
         } else {
             // Mostrar mensaje de error
@@ -356,7 +356,7 @@ form.addEventListener('submit', async function(e) {
 // BOTÓN VOLVER
 // ====================================
 volverbtn.addEventListener('click', function() {
-    window.location.href = '/html/Login/index.html';
+    window.location.href = '/index.html';
 });
 
 // ====================================

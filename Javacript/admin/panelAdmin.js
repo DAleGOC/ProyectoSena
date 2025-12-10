@@ -2141,7 +2141,7 @@ const btnGenerarPDF = document.querySelector('.btn-generar-pdf');
     btnCerrarSesion.addEventListener('click', function() {
         if (confirm('¿Cerrar sesión?')) {
             localStorage.clear();
-            window.location.href = '/html/Login/index.html';
+            window.location.href = '/index.html';
         }
     });
     

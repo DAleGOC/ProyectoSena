@@ -70,7 +70,7 @@ document.addEventListener('DOMContentLoaded', () => {
             if (confirm('¿Cerrar sesión?')) {
                 sessionStorage.clear(); // Mejor usar sessionStorage si es donde guardas la sesión
                 localStorage.clear();
-                window.location.href = '/html/Login/index.html';
+                window.location.href = '/index.html';
             }
         });
     }
