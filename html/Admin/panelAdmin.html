@@ -1,0 +1,1417 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Panel de Administración - SoluSoft</title>
+    
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css">
+    
+    <!-- TU HOJA DE ESTILOS EXISTENTE -->
+    <link rel="stylesheet" href="/css/styles.css">
+    
+</head>
+<body class="admin-page">
+    <!-- Header -->
+    <div class="admin-header">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-md-8">
+                    <h1 class="mb-0">
+                        <i class="bi bi-speedometer2"></i> Panel de Administración - SoluSoft
+                    </h1>
+                    <p class="mb-0 mt-2">
+                        <i class="bi bi-person-circle"></i> 
+                        Bienvenido, <strong id="adminName">Administrador</strong>
+                    </p>
+                </div>
+                <div class="col-md-4 text-end">
+                    <button class="btn btn-light" id="btnCerrarSesion">
+                        <i class="bi bi-box-arrow-right"></i> Cerrar Sesión
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Estadísticas -->
+    <div class="container mt-4">
+        <div class="row g-4">
+            <div class="col-md-4">
+                <div class="card stats-card bg-primary text-white">
+                    <div class="card-body">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div>
+                                <h6 class="card-subtitle mb-2 opacity-75">Usuarios Registrados</h6>
+                                <h2 class="card-title mb-0 fw-bold" id="totalUsuarios">0</h2>
+                            </div>
+                            <div>
+                                <i class="bi bi-people-fill" style="font-size: 3rem;"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-md-4">
+                <div class="card stats-card bg-success text-white">
+                    <div class="card-body">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div>
+                                <h6 class="card-subtitle mb-2 opacity-75">Empleados Activos</h6>
+                                <h2 class="card-title mb-0 fw-bold" id="totalEmpleados">0</h2>
+                            </div>
+                            <div>
+                                <i class="bi bi-person-badge-fill" style="font-size: 3rem;"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-md-4">
+                <div class="card stats-card bg-warning text-white">
+                    <div class="card-body">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div>
+                                <h6 class="card-subtitle mb-2 opacity-75">Productos en Sistema</h6>
+                                <h2 class="card-title mb-0 fw-bold" id="totalProductos">0</h2>
+                            </div>
+                            <div>
+                                <i class="bi bi-box-seam-fill" style="font-size: 3rem;"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+         
+            <div class="col-md-4">
+                <div class="card stats-card bg-secondary text-white">
+                    <div class="card-body">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div>
+                                <h6 class="card-subtitle mb-2 opacity-75">Clientes Registrados</h6>
+                                <h2 class="card-title mb-0 fw-bold" id="totalClientes">0</h2>
+                            </div>
+                            <div>
+                                <i class="bi bi-people-fill" style="font-size: 3rem;"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+    </div>
+   
+
+    <!-- Panel Principal -->
+    <div class="container mt-5 mb-5">
+            <div class="card shadow-lg">
+                <div class="card-body p-4">
+                <!-- Tabs de Navegación -->
+                <ul class="nav nav-tabs mb-4" id="adminTabs" role="tablist">
+                    <!--Tabs usuarios -->
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link active" id="usuarios-tab" data-bs-toggle="tab" 
+                                data-bs-target="#usuarios" type="button" role="tab">
+                            <i class="bi bi-people"></i> Gestión de Usuarios
+                        </button>
+                    </li>
+                    <!-- Tabs empleados -->
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link" id="empleados-tab" data-bs-toggle="tab" 
+                                data-bs-target="#empleados" type="button" role="tab">
+                            <i class="bi bi-person-badge"></i> Gestión de Empleados
+                        </button>
+                    </li>
+                    <!-- Tabs productos -->
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link" id="productos-tab" data-bs-toggle="tab" 
+                                data-bs-target="#productos" type="button" role="tab">
+                            <i class="bi bi-box-seam"></i> Gestión de Productos
+                        </button>
+                    </li>
+                    <!--Tabs categorias -->
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link" id="categorias-tab" data-bs-toggle="tab" 
+                                data-bs-target="#categorias" type="button" role="tab">
+                            <i class="bi bi-folder-fill"></i> Gestión de Categorías
+                        </button>
+                    </li>
+                    <!--Tabs clientes -->
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link" id="clientes-tab" data-bs-toggle="tab"
+                                data-bs-target="#clientes" type="button" role="tab">
+                            <i class="bi bi-people-fill"></i> Gestión de Clientes
+                        </button>
+                    </li>
+
+                    <!-- Tabs proveedores -->
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link" id="proveedores-tab" data-bs-toggle="tab" 
+                                data-bs-target="#proveedores" type="button" role="tab">
+                            <i class="bi bi-shop"></i> Gestión de Proveedores
+                        </button>
+                    </li>
+                    <!-- Tabs inventario -->
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link" id="inventario-tab" data-bs-toggle="tab" data-bs-target="#inventario" type="button" role="tab">
+                        <i class="bi bi-archive"></i> Gestión de Inventario
+                        </button>
+                    </li>
+                    <!-- Tabs metodos de pago -->
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link" id="metodos-tab" data-bs-toggle="tab"
+                                data-bs-target="#metodos" type="button" role="tab">
+                            <i class="bi bi-credit-card"></i> Métodos de Pago
+                        </button>
+                    </li>
+
+                
+                     <!-- Tabs Ventas-->
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link" id="ventas-tab" data-bs-toggle="tab" data-bs-target="#ventas" type="button" role="tab">
+                            <i class="bi bi-cash-coin"></i> Reporte de Ventas
+                        </button>
+                    </li>
+
+                </ul>
+
+                <!-- Contenido de los Tabs -->
+                <div class="tab-content" id="adminTabsContent">
+
+
+                    <!-- TAB: GESTIÓN DE USUARIOS -->
+                    <div class="tab-pane fade show active" id="usuarios" role="tabpanel">
+                        <div class="row mb-3 align-items-center">
+                            <div class="col-md-6">
+                                <h4 class="mb-0">
+                                    <i class="bi bi-people-fill text-primary"></i> Lista de Usuarios
+                                </h4>
+                            </div>
+                            <div class="col-md-6">
+                                <input type="text" class="form-control" 
+                                       id="buscarUsuario" placeholder="🔍 Buscar usuario...">
+                            </div>
+                        </div>
+                        
+                        <div class="table-responsive">
+                            <table class="table table-hover">
+                                <thead class="table-light">
+                                    <tr>
+                                        <th>ID</th>
+                                        <th>Nombre Completo</th>
+                                        <th>Usuario</th>
+                                        <th>Rol</th>
+                                        <th>Cargo</th>
+                                        <th>Estado</th>
+                                        <th>Acciones</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="tablaUsuarios">
+                                    <tr>
+                                        <td colspan="7" class="text-center py-5">
+                                            <div class="spinner-border text-primary" role="status">
+                                                <span class="visually-hidden">Cargando...</span>
+                                            </div>
+                                            <p class="mt-2 text-muted">Cargando usuarios...</p>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <!-- TAB: GESTIÓN DE EMPLEADOS -->
+                    <div class="tab-pane fade" id="empleados" role="tabpanel">
+                        <div class="row mb-3 align-items-center">
+                            <div class="col-md-6">
+                                <h4 class="mb-0">
+                                    <i class="bi bi-person-badge-fill text-success"></i> Lista de Empleados
+                                </h4>
+                            </div>
+                            <div class="col-md-6">
+                                <input type="text" class="form-control" 
+                                       id="buscarEmpleado" placeholder="🔍 Buscar empleado...">
+                            </div>
+                        </div>
+                        
+                        <div class="table-responsive">
+                            <table class="table table-hover">
+                                <thead class="table-light">
+                                    <tr>
+                                        <th>ID</th>
+                                        <th>Nombre Completo</th>
+                                        <th>Identificación</th>
+                                        <th>Cargo</th>
+                                        <th>Teléfono</th>
+                                        <th>Correo</th>
+                                        <th>Direccion<th>
+                                        <th>Estado</th>
+                                        <th>Acciones</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="tablaEmpleados">
+                                    <tr>
+                                        <td colspan="4" class="text-center py-5">
+                                            <div class="spinner-border text-success" role="status">
+                                                <span class="visually-hidden">Cargando...</span>
+                                            </div>
+                                            <p class="mt-2 text-muted">Cargando empleados...</p>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <!-- TAB: GESTIÓN DE PRODUCTOS -->
+                   <div class="tab-pane fade" id="productos" role="tabpanel">
+                        <div class="row mb-3 align-items-center">
+                            <div class="col-md-4">
+                                <h4 class="mb-0">
+                                    <i class="bi bi-box-seam-fill text-warning"></i> Lista de Productos
+                                </h4>
+                            </div>
+                            <div class="col-md-4">
+                                    <input type="text" class="form-control" 
+                                    id="buscarProducto" placeholder="🔍 Buscar producto...">
+                            </div>
+                            <div class="col-md-4 text-end">
+                                <!-- ✅ BOTÓN PARA AGREGAR NUEVO PRODUCTO -->
+                                    <button class="btn btn-success btn-lg" onclick="ModalAgregarProducto()">
+                                            <i class="bi bi-plus-circle"></i> Agregar Producto
+                                        </button>
+                                </div>
+                        </div>
+                    
+                        <div class="table-responsive">
+                            <table class="table table-hover">
+                                <thead class="table-light">
+                                    <tr>
+                                        <th>ID</th>
+                                        <th>Nombre</th>
+                                        <th>Categoría</th>
+                                        <th>Proveedor</th>
+                                        <th>Precio</th>
+                                        <th>Stock</th>
+                                        <th>Descripción</th>
+                                        <th>Acciones</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="tablaProductos">
+                                    <tr>
+                                        <td colspan="8" class="text-center py-5">
+                                            <div class="spinner-border text-warning" role="status">
+                                                <span class="visually-hidden">Cargando...</span>
+                                            </div>
+                                            <p class="mt-2 text-muted">Cargando productos...</p>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        
+
+                        <hr class="mt-4 mb-3">
+
+                        <div class="row mb-2 align-items-center">
+    <div class="col-md-8">
+        <h5 class="mb-0">
+            <i class="bi bi-exclamation-triangle-fill text-danger"></i>
+            Productos por reponer
+        </h5>
+        <small class="text-muted">
+            Productos cuyo stock es menor o igual al stock mínimo configurado.
+        </small>
+    </div>
+    <div class="col-md-4 text-end">
+        <button class="btn btn-outline-secondary btn-sm btn-cargarProductosReponer" onclick="cargarProductosPorReponer()">
+            <i class="bi bi-arrow-clockwise"></i> Actualizar
+        </button>
+    </div>
+                        </div>
+
+                        <div class="table-responsive">
+    <table class="table table-hover">
+        <thead class="table-light">
+            <tr>
+                <th>ID</th>
+                <th>Nombre</th>
+                <th>Stock</th>
+                <th>Stock mínimo</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody id="tablaProductosPorReponer">
+            <tr>
+                <td colspan="5" class="text-center py-4 text-muted">
+                    No hay productos por reponer.
+                </td>
+            </tr>
+        </tbody>
+    </table>
+                        </div>
+
+
+                    </div>
+
+                    <!-- TAB: GESTIÓN DE CATEGORÍAS -->
+                    <div class="tab-pane fade" id="categorias" role="tabpanel">
+                        <div class="row mb-3 align-items-center">
+                            <div class="col-md-4">
+                                <h4 class="mb-0">
+                                    <i class="bi bi-folder-fill text-info"></i> Lista de Categorías
+                                </h4>
+                            </div>
+                            <div class="col-md-4">
+                                <input type="text" class="form-control" 
+                                       id="buscarCategoria" placeholder="🔍 Buscar categoría...">
+                            </div>
+                            <div class="col-md-4 text-end">
+                                <button class="btn btn-info btn-lg text-white" onclick="abrirModalAgregarCategoria()">
+                                    <i class="bi bi-plus-circle"></i> Agregar Categoría
+                                </button>
+                            </div>
+                        </div>  
+                        <div class="table-responsive">
+                            <table class="table table-hover">
+                                <thead class="table-light">
+                                    <tr>
+                                        <th>ID</th>
+                                        <th>Nombre</th>
+                                        <th>Descripción</th>
+                                        <th>Acciones</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="tablaCategorias">
+                                    <tr>
+                                        <td colspan="4" class="text-center py-5">
+                                            <div class="spinner-border text-info" role="status">
+                                                <span class="visually-hidden">Cargando...</span>
+                                            </div>
+                                            <p class="mt-2 text-muted">Cargando categorías...</p>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>  
+                    <!-- TAB GESTIÓN DE METODOS DE Clientes--> 
+                    <div class="tab-pane fade" id="clientes" role="tabpanel">
+                        <div class="row mb-3 align-items-center">
+                            <div class="col-md-4">
+                            <h4 class="mb-0">
+                                <i class="bi bi-people-fill text-secondary"></i> Lista de Clientes
+                            </h4>
+                            </div>
+                            <div class="col-md-4">
+                            <input type="text" class="form-control" id="buscarCliente"
+                                    placeholder="Buscar cliente...">
+                            </div>
+                            <div class="col-md-4 text-end">
+                            <button class="btn btn-secondary btn-lg" onclick="abrirModalAgregarCliente()">
+                                <i class="bi bi-plus-circle"></i> Agregar Cliente
+                            </button>
+                            </div>
+                        </div>
+
+                        <div class="table-responsive">
+                            <table class="table table-hover">
+                            <thead class="table-light">
+                                <tr>
+                                <th>ID</th>
+                                <th>Nombre completo</th>
+                                <th>Teléfono</th>
+                                <th>Correo</th>
+                                <th>Dirección</th>
+                                <th>Estado</th>
+                                <th>Acciones</th>
+                                </tr>
+                            </thead>
+                            <tbody id="tablaClientes">
+                                <tr>
+                                <td colspan="7" class="text-center py-5">
+                                    <div class="spinner-border text-secondary" role="status">
+                                    <span class="visually-hidden">Cargando...</span>
+                                    </div>
+                                    <p class="mt-2 text-muted">Cargando clientes...</p>
+                                </td>
+                                </tr>
+                            </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <!-- TAB: GESTIÓN DE provedores -->
+                    <div class="tab-pane fade" id="proveedores" role="tabpanel">
+                        <div class="row mb-3 align-items-center">
+                            <div class="col-md-4">
+                                <h4 class="mb-0">
+                                    <i class="bi bi-shop text-danger"></i> Lista de Proveedores
+                                </h4>
+                            </div>
+                            <div class="col-md-4">
+                                <input type="text" class="form-control" 
+                                       id="buscarProveedor" placeholder="🔍 Buscar proveedor...">
+                            </div>
+                            <div class="col-md-4 text-end">
+                                <button class="btn btn-danger btn-lg text-white" onclick="abrirModalAgregarProveedor()">
+                                    <i class="bi bi-plus-circle"></i> Agregar Proveedor
+                                </button>
+                            </div>
+                        </div>
+                         <div class="alert alert-warning" role="alert">
+                            <strong>🏢 Total de proveedores:</strong> <span id="totalProveedores">0</span>
+                        </div>
+                        
+                        <div class="table-responsive">
+                            <table class="table table-hover">
+                                <thead class="table-light">
+                                    <tr>
+                                        <th>ID</th>
+                                        <th>Nombre</th>
+                                        <th>Teléfono</th>
+                                        <th>Correo</th>
+                                        <th>Dirección</th>
+                                        <th>Acciones</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="tablaProveedores">
+                                    <tr>
+                                        <td colspan="6" class="text-center py-5">
+                                            <div class="spinner-border text-danger" role="status">
+                                                <span class="visually-hidden">Cargando...</span>
+                                            </div>
+                                            <p class="mt-2 text-muted">Cargando proveedores...</p>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <!-- TAB GESTIÓN DE INVENTARIO -->
+                    <div class="tab-pane fade" id="inventario" role="tabpanel">
+                            <div class="row mb-3 align-items-center">
+                                <div class="col-md-4">
+                                    <h4 class="mb-0">
+                                        <i class="bi bi-archive-fill text-danger"></i> 
+                                        Gestión de Inventario
+                                    </h4>
+                                </div>
+                                <div class="col-md-4">
+                                    <input type="text" class="form-control" id="buscarInventario" placeholder="🔍 Buscar inventario...">
+                                </div>
+                                <div class="col-md-4 text-end">
+                                    <button class="btn btn-danger btn-lg text-white" onclick="ModalAgregarInventario()">
+                                        <i class="bi bi-plus-circle"></i> Agregar Entrada
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="alert alert-info" role="alert">
+                                <strong>Total de entradas:</strong> 
+                                <span id="totalInventario">0</span>
+                            </div>
+                            <div class="table-responsive">
+                                <table class="table table-hover">
+                                    <thead class="table-dark">
+                                        <tr>
+                                            <th>ID</th>
+                                            <th>Producto</th>
+                                            <th>Cantidad</th>
+                                            <th>Fecha Ingreso</th>
+                                            <th>Fecha Caducidad</th>
+                                            <th>Acciones</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="tablaInventario">
+                                        <tr>
+                                            <td colspan="6" class="text-center py-5">
+                                                <div class="spinner-border text-danger" role="status">
+                                                    <span class="visually-hidden">Cargando...</span>
+                                                </div>
+                                                <p class="mt-2 text-muted">Cargando inventario...</p>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                   
+                    </div>
+                    <!-- TAB GESTIÓN DE METODOS DE PAGO -->    
+                    <div class="tab-pane fade" id="metodos" role="tabpanel">
+                        <div class="row mb-3 align-items-center">
+                            <div class="col-md-4">
+                            <h4 class="mb-0">
+                                <i class="bi bi-credit-card text-primary"></i> Métodos de Pago
+                            </h4>
+                            </div>
+                            <div class="col-md-4">
+                            <input type="text" class="form-control" id="buscarMetodo"
+                                    placeholder="Buscar método...">
+                            </div>
+                            <div class="col-md-4 text-end">
+                            <button class="btn btn-primary btn-lg" onclick="abrirModalAgregarMetodo()">
+                                <i class="bi bi-plus-circle"></i> Agregar Método
+                            </button>
+                            </div>
+                        </div>
+
+                        <div class="table-responsive">
+                            <table class="table table-hover">
+                            <thead class="table-light">
+                                <tr>
+                                <th>ID</th>
+                                <th>Código</th>
+                                <th>Descripción</th>
+                                <th>Tipo</th>
+                                <th>Requiere Ref.</th>
+                                <th>Estado</th>
+                                <th>Acciones</th>
+                                </tr>
+                            </thead>
+                            <tbody id="tablaMetodos">
+                                <tr>
+                                <td colspan="7" class="text-center py-5">
+                                    <div class="spinner-border text-primary" role="status">
+                                    <span class="visually-hidden">Cargando...</span>
+                                    </div>
+                                    <p class="mt-2 text-muted">Cargando métodos de pago...</p>
+                                </td>
+                                </tr>
+                            </tbody>
+                            </table>
+                        </div>
+                    </div>
+                      <!-- TAB GESTIÓN DE REPORTES DE VENTA -->   
+                    <div class="tab-pane fade" id="ventas" role="tabpanel">
+                        <div class="row mb-3">
+                            <!-- Filtros -->
+                            <div class="col-md-3">
+                                <label class="form-label">Desde</label>
+                                <input type="date" class="form-control" id="filtroFechaInicio">
+                            </div>
+                            <div class="col-md-3">
+                                <label class="form-label">Hasta</label>
+                                <input type="date" class="form-control" id="filtroFechaFin">
+                            </div>
+                            <div class="col-md-3 d-flex align-items-end">
+                                <button class="btn btn-primary w-100" onclick="cargarReporteVentas()">
+                                    <i class="bi bi-search"></i> Filtrar
+                                </button>
+                            </div>
+                        </div>
+    
+                        <!-- Tabla -->
+                        <div class="table-responsive">
+                            <table class="table table-hover">
+                                <thead class="table-dark">
+                                    <tr>
+                                        <th>ID</th>
+                                        <th>Fecha</th>
+                                        <th>Empleado</th>
+                                        <th>Cliente</th>
+                                        <th>Total</th>
+                                        <th>Acciones</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="tablaReporteVentas"></tbody>
+                            </table>
+                        </div>
+                    </div>
+
+
+                </div>
+            </div>
+         </div>
+    </div>
+
+    <!-- Modal: Editar Usuario -->
+    <div class="modal fade" id="modalEditarUsuario" tabindex="-1">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">
+                        <i class="bi bi-pencil-square"></i> Editar Usuario
+                    </h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="formEditarUsuario">
+                        <input type="hidden" id="editUsuarioId">
+                        
+                        <div class="mb-3">
+                            <label class="form-label fw-bold">Nombre Completo</label>
+                            <input type="text" class="form-control" id="editNombre" readonly>
+                        </div>
+                        
+                        <div class="mb-3">
+                            <label class="form-label fw-bold">
+                                <i class="bi bi-person-badge"></i> Rol
+                            </label>
+                            <select class="form-select" id="editRol">
+                                <option value="Administrador">Administrador</option>
+                                <option value="Gerente">Gerente</option>
+                                <option value="Empleado">Empleado</option>
+                            </select>
+                        </div>
+                        
+                        <div class="mb-3">
+                            <label class="form-label fw-bold">
+                                <i class="bi bi-toggle-on"></i> Estado
+                            </label>
+                            <select class="form-select" id="editEstado">
+                                <option value="1">✅ Activo</option>
+                                <option value="0">❌ Inactivo</option>
+                            </select>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                        <i class="bi bi-x-circle"></i> Cancelar
+                    </button>
+                    <button type="button" class="btn btn-success" id="btnGuardarUsuario">
+                        <i class="bi bi-check-circle"></i> Guardar Cambios
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+                <!-- Modal: agregar  Prducto -->
+    <div class="modal fade" id="modalAgregarProducto" tabindex="-1" aria-labelledby="modalAgregarProductoLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header bg-success text-white">
+                        <h5 class="modal-title" id="modalAgregarProductoLabel">
+                            <i class="bi bi-plus-circle"></i> Agregar Nuevo Producto
+                        </h5>
+                        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="mb-3">
+                            <label for="agregarProductoNombre"><i class="bi bi-tag-fill"></i> Nombre *</label>
+                            <input type="text" class="form-control" id="agregarProductoNombre" required placeholder="Ej: Laptop">
+                        </div>
+                        <div class="mb-3">
+                            <label for="agregarProductoCategoria"><i class="bi bi-list"></i> Categoría *</label>
+                            <div class="input-group">
+                                <select class="form-select" id="agregarProductoCategoria" required>
+                                        <option value=""> Selecciona una categoría --</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <label for="agregarProductoProveedor"><i class="bi bi-shop"></i> Proveedor *</label>
+                            <select class="form-select" id="agregarProductoProveedor" required>
+                                <option value="">-- Selecciona un proveedor --</option>
+                            </select>
+                        </div>
+
+
+
+                        <div class="mb-3">
+                            <label for="agregarProductoPrecio"><i class="bi bi-currency-dollar"></i> Precio ($) *</label>
+                            <input type="number" class="form-control" id="agregarProductoPrecio" step="0.01" min="0.01" required placeholder="0.00">
+                        </div>
+                        <div class="mb-3">
+                            <label for="agregarProductoStock"><i class="bi bi-box2"></i> Stock *</label>
+                            <input type="number" class="form-control" id="agregarProductoStock" min="0" required placeholder="0">
+                        </div>
+                        <div class="mb-3">
+                            <label for="agregarProductoDescripcion"><i class="bi bi-file-text"></i> Descripción</label>
+                            <textarea class="form-control" id="agregarProductoDescripcion" rows="2" placeholder="Opcional"></textarea>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">❌ Cancelar</button>
+                        <button type="button" class="btn btn-success btn-guardar-nuevo-producto">✅ Guardar Producto</button>
+                    </div>
+                </div>
+            </div>
+    </div>
+  
+    
+    
+
+                    <!--========= Modal: Editar  Empleado ===============-->
+    <div class="modal fade" id="modalEditarEmpleado" tabindex="-1" aria-labelledby="modalEditarEmpleadoLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header bg-primary text-white">
+                    <h5 class="modal-title" id="modalEditarEmpleadoLabel">
+                        <i class="bi bi-pencil-square"></i> Editar Empleado
+                    </h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <input type="hidden" id="editEmpleadoId">
+                    
+                    <div class="mb-3">
+                        <label for="editEmpleadoNombre"><i class="bi bi-person-fill"></i> Nombre *</label>
+                        <input type="text" class="form-control" id="editEmpleadoNombre" required placeholder="Juan">
+                    </div>
+                    
+                    <div class="mb-3">
+                        <label for="editEmpleadoApellidos"><i class="bi bi-person-badge-fill"></i> Apellidos *</label>
+                        <input type="text" class="form-control" id="editEmpleadoApellidos" required placeholder="Pérez">
+                    </div>
+                    
+                    <div class="mb-3">
+                        <label for="editEmpleadoIdentificacion"><i class="bi bi-credit-card-2-front-fill"></i> Identificación *</label>
+                        <input type="text" class="form-control" id="editEmpleadoIdentificacion" required placeholder="123456789">
+                    </div>
+                    
+                    <div class="mb-3">
+                        <label for="editEmpleadoCargo"><i class="bi bi-briefcase-fill"></i> Cargo *</label>
+                        <input type="text" class="form-control" id="editEmpleadoCargo" required placeholder="Administrador">
+                    </div>
+                    
+                    <div class="mb-3">
+                        <label for="editEmpleadoCorreo"><i class="bi bi-envelope-fill"></i> Gmail</label>
+                        <input type="email" class="form-control" id="editEmpleadoCorreo" placeholder="ejemplo@gmail.com">
+                    </div>
+                    
+                    <div class="mb-3">
+                        <label for="editEmpleadoTelefono"><i class="bi bi-telephone-fill"></i> Teléfono</label>
+                        <input type="tel" class="form-control" id="editEmpleadoTelefono" placeholder="+1-555-1234">
+                    </div>
+                    
+                    <div class="mb-3">
+                        <label for="editEmpleadoDireccion"><i class="bi bi-geo-alt-fill"></i> Dirección</label>
+                        <input type="text" class="form-control" id="editEmpleadoDireccion" placeholder="Calle 123 #45-67">
+                    </div>
+                    
+                    <div class="mb-3">
+                        <label for="editEmpleadoEstado"><i class="bi bi-toggle-on"></i> Estado</label>
+                        <select class="form-select" id="editEmpleadoEstado" aria-label="Estado del empleado">
+                            <option value="1">✅ Activo</option>
+                            <option value="0">❌ Inactivo</option>
+                        </select>
+                    </div>
+                </div>
+                
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" aria-label="Cancelar">
+                        ❌ Cancelar
+                    </button>
+                    <button type="button" class="btn btn-success btn-guardar-empleado" aria-label="Guardar cambios del empleado">
+                        💾 Guardar Cambios
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+                    <!--========= Modal: Editar Producto ===============-->    
+    <div class="modal fade" id="modalEditarProducto" tabindex="-1" aria-labelledby="modalEditarProductoLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header bg-primary text-white">
+                    <h5 class="modal-title" id="modalEditarProductoLabel">
+                        <i class="bi bi-box-fill"></i> Editar Producto
+                    </h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <input type="hidden" id="editProductoId">
+                    <div class="mb-3">
+                        <label for="editProductoNombre"><i class="bi bi-tag-fill"></i> Nombre *</label>
+                        <input type="text" class="form-control" id="editProductoNombre" required placeholder="Ej: Laptop">
+                    </div>
+                    <div class="mb-3">
+                        <label for="editProductoCategoria"><i class="bi bi-list"></i> Categoría *</label>
+                        <div class="input-group">
+                        <select class="form-select" id="editProductoCategoria" required>
+                                    <option value="">-- Selecciona una categoría --</option>
+                        </select> 
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <label for="editProductoProveedor"><i class="bi bi-shop"></i> Proveedor *</label>
+                        <select class="form-select" id="editProductoProveedor" required>
+                            <option value="">-- Selecciona un proveedor --</option>
+                    </select>
+                    </div>
+                    <div class="mb-3">
+                        <label for="editProductoPrecio"><i class="bi bi-currency-dollar"></i> Precio ($) *</label>
+                        <input type="number" class="form-control" id="editProductoPrecio" step="0.01" min="0.01" required placeholder="0.00">
+                    </div>
+                    <div class="mb-3">
+                        <label for="editProductoStock"><i class="bi bi-box2"></i> Stock *</label>
+                        <input type="number" class="form-control" id="editProductoStock" min="0" required placeholder="0">
+                    </div>
+                    <div class="mb-3">
+                        <label for="editProductoDescripcion"><i class="bi bi-file-text"></i> Descripción</label>
+                        <textarea class="form-control" id="editProductoDescripcion" rows="2" placeholder="Opcional"></textarea>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">❌ Cancelar</button>
+                    <button type="button" class="btn btn-primary btn-guardar-producto" onclick="guardarCambiosProducto()">💾 Guardar Cambios</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="modal fade" id="modalAgregarCategoria" tabindex="-1" aria-labelledby="modalAgregarCategoriaLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header bg-success text-white">
+                    <h5 class="modal-title" id="modalAgregarCategoriaLabel">
+                        <i class="bi bi-plus-circle"></i> Agregar Nueva Categoría
+                    </h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="mb-3">
+                        <label for="agregarCategoriaNombre" class="form-label">
+                            <i class="bi bi-tag-fill"></i> Nombre de la Categoría *
+                        </label>
+                        <input  type="text"  class="form-control"  id="agregarCategoriaNombre"  placeholder="Ej: Electrónica, Ropa, Alimentos"       required>
+                        
+                        
+                    </div>
+                    <div class="mb-3">
+                        <label for="agregarCategoriaDescripcion" class="form-label">
+                            <i class="bi bi-file-text"></i> Descripción
+                        </label>
+                        <textarea  class="form-control" id="agregarCategoriaDescripcion"  rows="3" ></textarea>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                        <i class="bi bi-x-circle"></i> Cancelar
+                    </button>
+                    <button type="button" class="btn btn-success btn-agregar-categoria" onclick="agregarCategoria()">
+                        <i class="bi bi-check-circle"></i> Crear Categoría
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+    <div class="modal fade" id="modalEditarCategoria" tabindex="-1" aria-labelledby="modalEditarCategoriaLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header bg-warning text-dark">
+                    <h5 class="modal-title" id="modalEditarCategoriaLabel">
+                        <i class="bi bi-pencil-square"></i> Editar Categoría
+                    </h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <input type="hidden" id="editCategoriaId">
+                    
+                    <div class="mb-3">
+                        <label for="editCategoriaNombre" class="form-label">
+                            <i class="bi bi-tag-fill"></i> Nombre de la Categoría *
+                        </label>
+                        <input  type="text"  class="form-control" id="editCategoriaNombre"  placeholder="Ej: Electrónica, Ropa, Alimentos"   required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="editCategoriaDescripcion" class="form-label">
+                            <i class="bi bi-file-text"></i> Descripción
+                        </label>
+                        <textarea class="form-control"      id="editCategoriaDescripcion"   rows="3" ></textarea>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                        <i class="bi bi-x-circle"></i> Cancelar
+                    </button>
+                    <button type="button" class="btn btn-warning btn-guardar-categoria" onclick="guardarCambiosCategoria()">
+                        <i class="bi bi-check-circle"></i> Guardar Cambios
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+    <!-- ===== MODAL AGREGAR PROVEEDOR  ===== -->
+    <div class="modal fade" id="modalAgregarProveedor" tabindex="-1" aria-labelledby="modalAgregarProveedorLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header bg-success text-white">
+                    <h5 class="modal-title" id="modalAgregarProveedorLabel">
+                        <i class="bi bi-plus-circle"></i> Agregar Nuevo Proveedor
+                    </h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="mb-3">
+                        <label for="agregarProveedorNombre" class="form-label">
+                            <i class="bi bi-shop"></i> Nombre del Proveedor *
+                        </label>
+                        <input  type="text" class="form-control" id="agregarProveedorNombre"  placeholder="Ej: Tech Solutions S.A."       required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="agregarProveedorTelefono" class="form-label">
+                            <i class="bi bi-telephone-fill"></i> Teléfono
+                        </label>
+                        <input type="tel"  class="form-control" id="agregarProveedorTelefono" placeholder="+1-555-1234">
+                    </div>
+                    <div class="mb-3">
+                        <label for="agregarProveedorCorreo" class="form-label">
+                            <i class="bi bi-envelope-fill"></i> Correo
+                        </label>
+                        <input type="email"  class="form-control" id="agregarProveedorCorreo" placeholder="contacto@proveedor.com">
+                        
+                    </div>
+                    <div class="mb-3">
+                        <label for="agregarProveedorDireccion" class="form-label">
+                            <i class="bi bi-geo-alt-fill"></i> Dirección
+                        </label>
+                        <textarea class="form-control" id="agregarProveedorDireccion" rows="3" placeholder="Dirección del proveedor"></textarea>
+                        
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                        <i class="bi bi-x-circle"></i> Cancelar
+                    </button>
+                    <button type="button" class="btn btn-success btn-agregar-proveedor" onclick="agregarProveedor()">
+                        <i class="bi bi-check-circle"></i> Crear Proveedor
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- ===== MODAL AGREGAR EDITAR PROVEEDOR  ===== -->
+    <div class="modal fade" id="modalEditarProveedor" tabindex="-1" aria-labelledby="modalEditarProveedorLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header bg-warning text-dark">
+                    <h5 class="modal-title" id="modalEditarProveedorLabel">
+                        <i class="bi bi-pencil-square"></i> Editar Proveedor
+                    </h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <input type="hidden" id="editProveedorId">
+                    
+                    <div class="mb-3">
+                        <label for="editProveedorNombre" class="form-label">
+                            <i class="bi bi-shop"></i> Nombre del Proveedor *
+                        </label>
+                        <input 
+                            type="text" 
+                            class="form-control" 
+                            id="editProveedorNombre" 
+                            placeholder="Nombre del proveedor"
+                            required
+                        >
+                    </div>
+                    <div class="mb-3">
+                        <label for="editProveedorTelefono" class="form-label">
+                            <i class="bi bi-telephone-fill"></i> Teléfono
+                        </label>
+                        <input 
+                            type="tel" 
+                            class="form-control" 
+                            id="editProveedorTelefono" 
+                            placeholder="+1-555-1234"
+                        >
+                    </div>
+                    <div class="mb-3">
+                        <label for="editProveedorCorreo" class="form-label">
+                            <i class="bi bi-envelope-fill"></i> Correo
+                        </label>
+                        <input 
+                            type="email" 
+                            class="form-control" 
+                            id="editProveedorCorreo" 
+                            placeholder="contacto@proveedor.com"
+                        >
+                    </div>
+                    <div class="mb-3">
+                        <label for="editProveedorDireccion" class="form-label">
+                            <i class="bi bi-geo-alt-fill"></i> Dirección
+                        </label>
+                        <textarea 
+                            class="form-control" 
+                            id="editProveedorDireccion" 
+                            rows="3" 
+                            placeholder="Dirección del proveedor"
+                        ></textarea>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                        <i class="bi bi-x-circle"></i> Cancelar
+                    </button>
+                    <button type="button" class="btn btn-warning btn-guardar-proveedor" onclick="guardarCambiosProveedor()">
+                        <i class="bi bi-check-circle"></i> Guardar Cambios
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ======MODAL AGREGAR INVENTARIO====== -->
+    <div class="modal fade" id="modalAgregarInventario" tabindex="-1">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header bg-danger text-white">
+                    <h5 class="modal-title">
+                        <i class="bi bi-plus-circle"></i> Agregar Entrada Inventario
+                    </h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="mb-3">
+                        <label for="agregarInventarioProducto" class="form-label">
+                            <i class="bi bi-box-seam"></i> Producto *
+                        </label>
+                        <select class="form-select" id="agregarInventarioProducto" required>
+                            <option value="">-- Selecciona un producto --</option>
+                        </select>
+                    </div>
+                    <div class="mb-3">
+                        <label for="agregarInventarioCantidad" class="form-label">
+                            <i class="bi bi-box2"></i> Cantidad *
+                        </label>
+                        <input type="number" class="form-control" id="agregarInventarioCantidad" min="1" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="agregarInventarioFechaIngreso" class="form-label">
+                            <i class="bi bi-calendar"></i> Fecha Ingreso *
+                        </label>
+                        <input type="date" class="form-control" id="agregarInventarioFechaIngreso" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="agregarInventarioFechaCaducidad" class="form-label">
+                            <i class="bi bi-calendar-x"></i> Fecha Caducidad (Opcional)
+                        </label>
+                        <input type="date" class="form-control" id="agregarInventarioFechaCaducidad">
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                    <button type="button" class="btn btn-success btn-guardar-nuevo-inventario">
+                        ✅ Guardar Entrada
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ========Modal EDITAR INVENTARIO ========= -->
+    <div class="modal fade" id="modalEditarInventario" tabindex="-1">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header bg-primary text-white">
+                    <h5 class="modal-title">
+                        <i class="bi bi-pencil-square"></i> Editar Entrada Inventario
+                    </h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <input type="hidden" id="editInventarioId">
+                    <div class="mb-3">
+                        <label for="editInventarioProducto" class="form-label">
+                            <i class="bi bi-box-seam"></i> Producto *
+                        </label>
+                        <select class="form-select" id="editInventarioProducto" required>
+                            <option value="">-- Selecciona un producto --</option>
+                        </select>
+                    </div>
+                    <div class="mb-3">
+                        <label for="editInventarioCantidad" class="form-label">
+                            <i class="bi bi-box2"></i> Cantidad *
+                        </label>
+                        <input type="number" class="form-control" id="editInventarioCantidad" min="1" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="editInventarioFechaIngreso" class="form-label">
+                            <i class="bi bi-calendar"></i> Fecha Ingreso *
+                        </label>
+                        <input type="date" class="form-control" id="editInventarioFechaIngreso" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="editInventarioFechaCaducidad" class="form-label">
+                            <i class="bi bi-calendar-x"></i> Fecha Caducidad (Opcional)
+                        </label>
+                        <input type="date" class="form-control" id="editInventarioFechaCaducidad">
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                    <button type="button" class="btn btn-primary btn-guardar-inventario">
+                        ✅ Guardar Cambios
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Agregar Método de Pago -->
+    <div class="modal fade" id="modalAgregarMetodo" tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+        <div class="modal-header bg-primary text-white">
+            <h5 class="modal-title">
+            <i class="bi bi-plus-circle"></i> Agregar Método de Pago
+            </h5>
+            <button type="button" class="btn-close btn-close-white"
+                    data-bs-dismiss="modal"></button>
+        </div>
+        <div class="modal-body">
+            <div class="mb-3">
+            <label for="agregarMetodoCodigo" class="form-label">Código *</label>
+            <input type="text" class="form-control" id="agregarMetodoCodigo"
+                    maxlength="20" placeholder="EFECTIVO, NEQUI...">
+            </div>
+            <div class="mb-3">
+            <label for="agregarMetodoDescripcion" class="form-label">Descripción *</label>
+            <input type="text" class="form-control" id="agregarMetodoDescripcion"
+                    maxlength="100">
+            </div>
+            <div class="mb-3">
+            <label for="agregarMetodoTipo" class="form-label">Tipo *</label>
+            <select class="form-select" id="agregarMetodoTipo">
+                <option value="">-- Selecciona --</option>
+                <option value="EFECTIVO">Efectivo</option>
+                <option value="ELECTRONICO">Electrónico</option>
+                <option value="TRANSFERENCIA">Transferencia</option>
+            </select>
+            </div>
+            <div class="form-check mb-3">
+            <input class="form-check-input" type="checkbox"
+                    id="agregarMetodoRequiereRef">
+            <label class="form-check-label" for="agregarMetodoRequiereRef">
+                Requiere referencia (Nequi, banco, etc.)
+            </label>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-secondary"
+                    data-bs-dismiss="modal">Cancelar</button>
+            <button type="button"
+                    class="btn btn-success btn-guardar-metodo">
+            Guardar Método
+            </button>
+        </div>
+        </div>
+    </div>
+    </div>
+
+    <!-- Modal Editar Método de Pago -->
+    <div class="modal fade" id="modalEditarMetodo" tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+        <div class="modal-header bg-warning text-dark">
+            <h5 class="modal-title">
+            <i class="bi bi-pencil-square"></i> Editar Método de Pago
+            </h5>
+            <button type="button" class="btn-close"
+                    data-bs-dismiss="modal"></button>
+        </div>
+        <div class="modal-body">
+            <input type="hidden" id="editMetodoId">
+            <div class="mb-3">
+            <label for="editMetodoCodigo" class="form-label">Código *</label>
+            <input type="text" class="form-control" id="editMetodoCodigo"
+                    maxlength="20">
+            </div>
+            <div class="mb-3">
+            <label for="editMetodoDescripcion" class="form-label">Descripción *</label>
+            <input type="text" class="form-control" id="editMetodoDescripcion"
+                    maxlength="100">
+            </div>
+            <div class="mb-3">
+            <label for="editMetodoTipo" class="form-label">Tipo *</label>
+            <select class="form-select" id="editMetodoTipo">
+                <option value="EFECTIVO">Efectivo</option>
+                <option value="ELECTRONICO">Electrónico</option>
+                <option value="TRANSFERENCIA">Transferencia</option>
+            </select>
+            </div>
+            <div class="form-check mb-3">
+            <input class="form-check-input" type="checkbox"
+                    id="editMetodoRequiereRef">
+            <label class="form-check-label" for="editMetodoRequiereRef">
+                Requiere referencia
+            </label>
+            </div>
+            <div class="form-check mb-3">
+            <input class="form-check-input" type="checkbox"
+                    id="editMetodoEstado" checked>
+            <label class="form-check-label" for="editMetodoEstado">
+                Activo
+            </label>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-secondary"
+                    data-bs-dismiss="modal">Cancelar</button>
+            <button type="button"
+                    class="btn btn-warning btn-guardar-metodo-edit">
+            Guardar Cambios
+            </button>
+        </div>
+        </div>
+    </div>
+    </div>
+
+    <!-- ========MODALES CLIENTES========= -->
+    <!-- Modal Agregar Cliente -->
+    <div class="modal fade" id="modalAgregarCliente" tabindex="-1">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                <div class="modal-header bg-secondary text-white">
+                    <h5 class="modal-title">
+                    <i class="bi bi-plus-circle"></i> Agregar Cliente
+                    </h5>
+                    <button type="button" class="btn-close btn-close-white"
+                            data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="mb-3">
+                    <label for="agregarClienteNombre" class="form-label">Nombre *</label>
+                    <input type="text" class="form-control" id="agregarClienteNombre">
+                    </div>
+                    <div class="mb-3">
+                    <label for="agregarClienteApellidos" class="form-label">Apellidos *</label>
+                    <input type="text" class="form-control" id="agregarClienteApellidos">
+                    </div>
+                    <div class="mb-3">
+                    <label for="agregarClienteTelefono" class="form-label">Teléfono</label>
+                    <input type="text" class="form-control" id="agregarClienteTelefono">
+                    </div>
+                    <div class="mb-3">
+                    <label for="agregarClienteCorreo" class="form-label">Correo</label>
+                    <input type="email" class="form-control" id="agregarClienteCorreo">
+                    </div>
+                    <div class="mb-3">
+                    <label for="agregarClienteDireccion" class="form-label">Dirección</label>
+                    <textarea class="form-control" id="agregarClienteDireccion" rows="2"></textarea>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary"
+                            data-bs-dismiss="modal">Cancelar</button>
+                    <button type="button"
+                            class="btn btn-success btn-guardar-cliente-nuevo">
+                    Guardar Cliente
+                    </button>
+                </div>
+                </div>
+            </div>
+    </div>
+
+<!-- Modal Editar Cliente -->
+    <div class="modal fade" id="modalEditarCliente" tabindex="-1">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+            <div class="modal-header bg-warning text-dark">
+                <h5 class="modal-title">
+                <i class="bi bi-pencil-square"></i> Editar Cliente
+                </h5>
+                <button type="button" class="btn-close"
+                        data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body">
+                <input type="hidden" id="editClienteId">
+                <div class="mb-3">
+                <label for="editClienteNombre" class="form-label">Nombre *</label>
+                <input type="text" class="form-control" id="editClienteNombre">
+                </div>
+                <div class="mb-3">
+                <label for="editClienteApellidos" class="form-label">Apellidos *</label>
+                <input type="text" class="form-control" id="editClienteApellidos">
+                </div>
+                <div class="mb-3">
+                <label for="editClienteTelefono" class="form-label">Teléfono</label>
+                <input type="text" class="form-control" id="editClienteTelefono">
+                </div>
+                <div class="mb-3">
+                <label for="editClienteCorreo" class="form-label">Correo</label>
+                <input type="email" class="form-control" id="editClienteCorreo">
+                </div>
+                <div class="mb-3">
+                <label for="editClienteDireccion" class="form-label">Dirección</label>
+                <textarea class="form-control" id="editClienteDireccion" rows="2"></textarea>
+                </div>
+                <div class="form-check mb-3">
+                <input class="form-check-input" type="checkbox" id="editClienteEstado" checked>
+                <label class="form-check-label" for="editClienteEstado">
+                    Activo
+                </label>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary"
+                        data-bs-dismiss="modal">Cancelar</button>
+                <button type="button"
+                        class="btn btn-warning btn-guardar-cliente-edit">
+                Guardar Cambios
+                </button>
+            </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Detalle de Venta (Faltaba este bloque) -->
+<div class="modal fade" id="modalDetalleVenta" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header bg-info text-white">
+                <h5 class="modal-title"><i class="bi bi-receipt"></i> Detalle de Venta #<span id="lblIdVenta"></span></h5>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="table-responsive">
+                    <table class="table table-striped table-hover">
+                        <thead class="table-light">
+                            <tr>
+                                <th>Producto</th>
+                                <th class="text-center">Cant.</th>
+                                <th class="text-end">Precio Unit.</th>
+                                <th class="text-end">Subtotal</th>
+                            </tr>
+                        </thead>
+                        <tbody id="tablaDetalleModal">
+                            <!-- Aquí se insertan las filas desde JS -->
+                        </tbody>
+                    </table>
+                </div>
+                <div class="text-end mt-3 border-top pt-2">
+                    <h4 class="fw-bold">Total: $<span id="lblTotalVenta">0.00</span></h4>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+    
+    <!-- Bootstrap 5 JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    
+    <!-- JavaScript Principal -->
+    <script type="module" src="/Javacript/Admin/panelAdmin.js"></script>
+</body>
+</html>

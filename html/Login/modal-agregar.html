@@ -1,0 +1,232 @@
+<!doctype html>
+<html lang="es">
+    <head>
+        <title>Solusoft - Registro de Usuario</title>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css">
+        <link rel="stylesheet" href="/css/styles.css">
+        <link
+            href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+            rel="stylesheet"
+            integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
+            crossorigin="anonymous"
+        />
+    </head>
+
+    <body class="form-page">
+        <div class="container">
+            <div class="form-container">
+                <h3 class="text-center fw-bold mb-4">
+                    <i class="bi bi-person-plus-fill"></i> Registro Nuevo Usuario
+                </h3>
+                
+                <form id="registerForm">
+                    <!-- SECCIÓN: INFORMACIÓN PERSONAL -->
+                    <div class="mb-4">
+                        <h5 class="fw-bold text-primary">
+                            <i class="bi bi-person-circle"></i> Información Personal
+                        </h5>
+                        <hr>
+                    </div>
+
+                    <!-- Nombre -->
+                    <div class="mb-3">
+                        <label class="form-label fw-bold">
+                            <i class="bi bi-person"></i> Nombres <span class="text-danger">*</span>
+                        </label>
+                        <input type="text" id="nombre" class="form-control" placeholder="Ingrese su nombre" required>
+                        <div class="invalid-feedback" id="nombreError"></div>
+                    </div>
+
+                    <!-- Apellidos -->
+                    <div class="mb-3">
+                        <label class="form-label fw-bold">
+                            <i class="bi bi-person"></i> Apellidos <span class="text-danger">*</span>
+                        </label>
+                        <input type="text" id="apellidos" class="form-control" placeholder="Ingrese sus apellidos" required>
+                        <div class="invalid-feedback" id="apellidosError"></div>
+                    </div>
+
+                    <!-- Identificación -->
+                    <div class="mb-3">
+                        <label class="form-label fw-bold">
+                            <i class="bi bi-card-text"></i> Identificación <span class="text-danger">*</span>
+                        </label>
+                        <input 
+                            type="text" 
+                            id="identificacion" 
+                            class="form-control" 
+                            placeholder="Ej: 1234567890" 
+                            pattern="[0-9]{6,15}" 
+                            maxlength="20" 
+                            required>
+                        <small class="text-muted">Solo números, sin espacios ni guiones</small>
+                        <div class="invalid-feedback" id="identificacionError"></div>
+                    </div>
+
+                    <!-- Dirección -->
+                    <div class="mb-3">
+                        <label class="form-label fw-bold">
+                            <i class="bi bi-house"></i> Dirección
+                        </label>
+                        <input type="text" id="direccion" class="form-control" placeholder="Ej: Calle 10 #25-30">
+                        <div class="invalid-feedback" id="direccionError"></div>
+                    </div>
+
+                    <!-- Teléfono -->
+                    <div class="mb-3">
+                        <label class="form-label fw-bold">
+                            <i class="bi bi-telephone"></i> Teléfono de contacto
+                        </label>
+                        <input 
+                            type="tel" 
+                            id="telefono" 
+                            class="form-control" 
+                            placeholder="Ej: 3001234567" 
+                            pattern="[0-9]{7,15}"
+                            maxlength="20">
+                        <small class="text-muted">Número de contacto (celular o fijo)</small>
+                        <div class="invalid-feedback" id="telefonoError"></div>
+                    </div>
+
+                    <!-- Correo -->
+                    <div class="mb-3">
+                        <label class="form-label fw-bold">
+                            <i class="bi bi-envelope"></i> Correo Electrónico
+                        </label>
+                        <input 
+                            type="email" 
+                            id="correo" 
+                            class="form-control" 
+                            placeholder="ejemplo@correo.com">
+                        <div class="invalid-feedback" id="correoError"></div>
+                    </div>
+
+                    <!-- ⭐ NUEVO: CARGO -->
+                    <div class="mb-3">
+                        <label class="form-label fw-bold">
+                            <i class="bi bi-briefcase"></i> Cargo <span class="text-danger">*</span>
+                        </label>
+                        <select id="cargo" class="form-select" required>
+                            <option value="">Seleccione un cargo...</option>
+                            <option value="Cajero">Cajero</option>
+                            <option value="Vendedor">Vendedor</option>
+                            <option value="Bodeguero">Bodeguero</option>
+                            <option value="Supervisor">Supervisor</option>
+                            <option value="Gerente">Gerente</option>
+                            <option value="Administrativo">Administrativo</option>
+                            <option value="Otro">Otro</option>
+                        </select>
+                        <div class="invalid-feedback" id="cargoError"></div>
+                    </div>
+
+                    <!-- SECCIÓN: CREDENCIALES DE ACCESO -->
+                    <div class="mb-4 mt-5">
+                        <h5 class="fw-bold text-primary">
+                            <i class="bi bi-shield-lock"></i> Credenciales de Acceso
+                        </h5>
+                        <hr>
+                    </div>
+
+                    <!-- Nombre de Usuario -->
+                    <div class="mb-3">
+                        <label class="form-label fw-bold">
+                            <i class="bi bi-person-badge"></i> Nombre de Usuario <span class="text-danger">*</span>
+                        </label>
+                        <input 
+                            type="text" 
+                            id="nombreUsuario" 
+                            class="form-control" 
+                            placeholder="Usuario para iniciar sesión" 
+                            minlength="4"
+                            maxlength="50"
+                            required>
+                        <small class="text-muted">Mínimo 4 caracteres, sin espacios</small>
+                        <div class="invalid-feedback" id="nombreUsuarioError"></div>
+                    </div>
+
+                    <!-- Contraseña -->
+                    <div class="mb-3">
+                        <label class="form-label fw-bold">
+                            <i class="bi bi-lock"></i> Contraseña <span class="text-danger">*</span>
+                        </label>
+                        <div class="input-group">
+                            <input 
+                                type="password" 
+                                id="password" 
+                                class="form-control" 
+                                placeholder="Ingrese su contraseña" 
+                                minlength="6"
+                                required>
+                            <button type="button" class="btn btn-outline-secondary toggle-password" data-target="password">
+                                <i class="bi bi-eye"></i>
+                            </button>
+                        </div>
+                        <div class="mt-2">
+                            <div class="progress">
+                                <div class="progress-bar" id="strengthBar" role="progressbar" style="width: 0%"></div>
+                            </div>
+                            <small id="strengthText" class="form-text"></small>
+                            <small class="form-text text-muted d-block mt-1">
+                                <i class="bi bi-info-circle"></i> 
+                                Mínimo 6 caracteres. Se recomienda incluir mayúsculas, números y símbolos.
+                            </small>
+                        </div>
+                        <div class="invalid-feedback" id="passwordError"></div>
+                    </div>
+
+                    <!-- Confirmar Contraseña -->
+                    <div class="mb-3">
+                        <label class="form-label fw-bold">
+                            <i class="bi bi-lock-fill"></i> Confirmar Contraseña <span class="text-danger">*</span>
+                        </label>
+                        <div class="input-group">
+                            <input 
+                                type="password" 
+                                id="confirmPassword" 
+                                class="form-control" 
+                                placeholder="Repita su contraseña" 
+                                required>
+                            <button type="button" class="btn btn-outline-secondary toggle-password" data-target="confirmPassword">
+                                <i class="bi bi-eye"></i>
+                            </button>
+                        </div>
+                        <div class="invalid-feedback" id="confirmPasswordError"></div>
+                    </div>
+
+                    <!-- Mensaje de error general -->
+                    <div id="registerError" class="alert alert-danger d-none"></div>
+                    
+                    <!-- Mensaje de éxito -->
+                    <div id="registerSuccess" class="alert alert-success d-none"></div>
+
+                    <!-- Información importante -->
+                    <div class="alert alert-info mb-4">
+                        <i class="bi bi-info-circle-fill"></i>
+                        <strong>Importante:</strong> Tu cuenta debe ser activada por un administrador antes de poder iniciar sesión.
+                    </div>
+
+                    <!-- Botones -->
+                    <div class="d-flex justify-content-between gap-3 mt-4">
+                        <button type="submit" id="submitBtn" class="btn btn-success flex-fill" disabled>
+                            <i class="bi bi-check-circle"></i> Registrar
+                        </button>
+                        <button id="volverbtn" type="button" class="btn btn-secondary flex-fill">
+                            <i class="bi bi-arrow-left"></i> Volver
+                        </button>
+                    </div>
+
+                    <!-- Los campos marcados con * son obligatorios -->
+                    <div class="text-center mt-3">
+                        <small class="text-muted">
+                            <i class="bi bi-asterisk text-danger"></i> Campos obligatorios
+                        </small>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <script type="module" src="/Javacript/Login/agregarUsuario.js"></script>
+    </body>
+</html>
