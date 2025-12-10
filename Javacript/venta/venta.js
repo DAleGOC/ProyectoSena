@@ -8,7 +8,7 @@ import {
     apiUrlProducto, 
     apiUrlUsuario, 
     apiUrlDetalleVenta
-} from "./api/apiUrlSolusoft.js";
+} from "../api/apiUrlSolusoft.js";
 
 // =========================================================================
 // 2. VARIABLES GLOBALES
