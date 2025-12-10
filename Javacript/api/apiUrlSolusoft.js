@@ -1,5 +1,5 @@
 // ✅ URLs de la API REAL de Solusoft
-export const API_BASE_URL = 'http://www.solusoftweb.somee.com/api';
+export const API_BASE_URL = 'https://www.solusoftweb.somee.com/api';
 
 // Endpoints de Usuarios y Autenticación
 export const apiUrlLogin = `${API_BASE_URL}/empleadoUsuario/login`;

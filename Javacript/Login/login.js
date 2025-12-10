@@ -87,7 +87,7 @@ if (loginForm) {
                 // Redirigir según el rol
                 setTimeout(() => {
                     if (data.data.rol === 'Administrador') {
-                        window.location.href = '../Admin/panelAdmin.html'; // Página de admin
+                        window.location.href = '/html/Admin/panelAdmin.html'; // Página de admin
                     } else {
                         window.location.href = '/html/Venta/venta.html'; // Página de usuario
                     }
@@ -142,7 +142,7 @@ window.addEventListener('DOMContentLoaded', function() {
     const sesion = obtenerSesion();
     if (sesion && window.location.pathname.includes('index.html')) {
        if (sesion.rol === 'Administrador') {
-           window.location.href = '../Admin/panelAdmin.html';
+           window.location.href = '/html/Admin/panelAdmin.html';
       } else {
            window.location.href = '/html/Venta/venta.html';
      }
