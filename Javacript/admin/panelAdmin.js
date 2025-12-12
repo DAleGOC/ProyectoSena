@@ -143,6 +143,7 @@ async function cargarProductos() {
         if (data.success) {
             productos = data.data || [];
             mostrarProductos(productos);
+            // Cargar proveedores para mostrar nombres
             totalProductos.textContent = productos.length;
         }
     } catch (error) {
@@ -238,12 +239,13 @@ function mostrarProductos(lista) {
     
     tablaProductos.innerHTML = lista.map(p => {
         // Buscar el nombre de la categoría
-        const categoria = categorias.find(c => c.ID_Categoria === p.iD_Categoria || c.iD_Categoria === p.iD_Categoria);
+        const categoria = categorias.find(c =>  c.iD_Categoria === p.iD_Categoria);
         const nombreCategoria = categoria ? categoria.nombre : 'Sin categoría';
         
         // Buscar el nombre del proveedor
-        const proveedor = proveedores.find(pr => pr.ID_Proveedor === p.iD_Proveedor || pr.iD_Proveedor === p.iD_Proveedor);
+        const proveedor = proveedores.find(pr => pr.iD_Proveedor === p.iD_Proveedor );
         const nombreProveedor = proveedor ?  proveedor.nombre : 'Sin proveedor';
+        
         
         return `
             <tr>
@@ -842,7 +844,7 @@ function mostrarCategorias(lista) {
             <td>${c.nombre}</td>
             <td>${c.descripcion ? c.descripcion.substring(0, 50) + '...' : '<span class="text-muted">Sin descripción</span>'}</td>
             <td>
-                <button class="btn btn-sm btn-primary" onclick="editarCategoria(${c.ID_Categoria})" title="Editar">
+                <button class="btn btn-sm btn-primary" onclick="editarCategoria(${c.iD_Categoria})" title="Editar">
                     <i class="bi bi-pencil"></i> Editar
                 </button>
                 <button class="btn btn-sm btn-danger" onclick="eliminarCategoria(${c.iD_Categoria})" title="Eliminar">
@@ -865,7 +867,7 @@ function filtrarCategorias() {
 
 // Editar categoría
 function editarCategoria(id) {
-    categoriaSeleccionada = categorias.find(c => c.ID_Categoria === id);
+    categoriaSeleccionada = categorias.find(c => c.iD_Categoria === id);
     if (!categoriaSeleccionada) {
         mostrarAlerta('Categoría no encontrada', 'warning');
         return;
@@ -1015,7 +1017,7 @@ function mostrarProveedores(lista) {
             <td>${p.correo ? `<a href="mailto:${p.correo}">${p.correo}</a>` : '<span class="text-muted">-</span>'}</td>
             <td>${p.direccion ? p.direccion.substring(0, 40) + '...' : '<span class="text-muted">-</span>'}</td>
             <td>
-                <button class="btn btn-sm btn-primary" onclick="editarProveedor(${p.ID_Proveedor})" title="Editar">
+                <button class="btn btn-sm btn-primary" onclick="editarProveedor(${p.iD_Proveedor})" title="Editar">
                     <i class="bi bi-pencil"></i> Editar
                 </button>
                 <button class="btn btn-sm btn-danger" onclick="eliminarProveedor(${p.iD_Proveedor})" title="Eliminar">
@@ -1042,7 +1044,7 @@ function filtrarProveedores() {
 
 // ===== EDITAR PROVEEDOR =====
 function editarProveedor(id) {
-    proveedorSeleccionado = proveedores.find(p => p.ID_Proveedor === id);
+    proveedorSeleccionado = proveedores.find(p => p.iD_Proveedor === id);
     if (!proveedorSeleccionado) {
         mostrarAlerta('Proveedor no encontrado', 'warning');
         return;
@@ -1208,7 +1210,7 @@ function mostrarInventario(lista) {
             <td>${new Date(i.fecha_Ingreso).toLocaleDateString('es-ES')}</td>
             <td>${i.fecha_Caducidad ? new Date(i.fecha_Caducidad).toLocaleDateString('es-ES') : 'Sin caducidad'}</td>
             <td>
-                <button class="btn btn-sm btn-primary" onclick="editarInventario(${i.ID_Inventario})">
+                <button class="btn btn-sm btn-primary" onclick="editarInventario(${i.iD_Inventario})">
                     <i class="bi bi-pencil"></i> Editar
                 </button>
                 <button class="btn btn-sm btn-danger" onclick="eliminarInventario(${i.iD_Inventario})">
@@ -1295,7 +1297,7 @@ async function guardarNuevoInventario() {
 
 // EDITAR INVENTARIO
 function editarInventario(id) {
-    inventarioSeleccionado = inventario.find(i => i.ID_Inventario === id);
+    inventarioSeleccionado = inventario.find(i => i.iD_Inventario === id);
     if (!inventarioSeleccionado) {
         mostrarAlerta('Entrada no encontrada', 'warning');
         return;
