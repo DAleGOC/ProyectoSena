@@ -1,4 +1,4 @@
-import { apiUrlVenta ,apiUrlDetalleVenta} from "../Javacript/api/apiUrlSolusoft.js";
+import { apiUrlVenta ,apiUrlDetalleVenta} from "../api/apiUrlSolusoft.js";
 
 
 
